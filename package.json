@@ -1,0 +1,22 @@
+{
+  "name": "Danoninha",
+  "version": "1.0.0",
+  "description": "Minha secretária pessoal hot and sunny",
+  "main": "main.js",
+  "scripts": {
+    "start": "micro-bot"
+  },
+  "keywords": [
+    "telegram",
+    "bot",
+    "secretary",
+    "hot",
+    "sunny"
+  ],
+  "author": "Matheus Marques Polillo",
+  "license": "MIT",
+  "dependencies": {
+    "micro-bot": "^2.5.3",
+    "moment-timezone": "^0.5.33"
+  }
+}
