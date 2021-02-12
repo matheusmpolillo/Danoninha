@@ -1,9 +1,12 @@
 {
   "main": "main.js",
-  "scripts": { "start": "micro-bot" },
+  "scripts": {
+    "start": "micro-bot"
+  },
   "author": "Matheus Marques Polillo",
   "license": "MIT",
   "dependencies": {
+    "axios": "^0.21.1",
     "micro-bot": "^2.5.3",
     "moment-timezone": "^0.5.33"
   }

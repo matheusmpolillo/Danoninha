@@ -1,7 +1,7 @@
 const moment = require('moment-timezone');
 const schedule = require('../services/cache.js').schedule;
 
-module.exports = (method, event, datetime = null) => {
+module.exports = (method, event = null, datetime = null) => {
 	let reply = '';
 	switch (method.toLowerCase()) {
 		case 'show':
@@ -15,11 +15,11 @@ module.exports = (method, event, datetime = null) => {
 		case 'add':
 			datetime = `2020-${datetime.replace(/T/g, ' ')}`;
 			schedule[event] = moment(datetime).tz(process.env.MOMENT_TIMEZONE).toDate();
-			return { type: 'reply', message: `*${event.replace(/_/g, ' ')}* successfully added` };
+			return { type: 'replyWithMarkdown', message: `*${event.replace(/_/g, ' ')}* successfully added` };
 		case 'remove':
 			if (schedule.hasOwnProperty(event)) {
 				delete schedule[event];
-				return reply = `*${event.replace(/_/g, ' ')}* successfully removed`;
+				reply = `*${event.replace(/_/g, ' ')}* successfully removed`;
 			} else reply = `*${event.replace(/_/g, ' ')}* event does not exist`;
 			return { type: 'replyWithMarkdown', message: reply };
 	}
