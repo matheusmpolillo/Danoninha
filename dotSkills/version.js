@@ -9,7 +9,7 @@ module.exports = async (app) => {
 		case 'bot':
 			return { type: 'replyWithMarkdown', message: `*Bot:* v${version}` };
 		case 'api':
-			reply = await request(`${process.env.DANONINHA_API}/version`, 'GET');
+			reply = await request(`${process.env.DANONINHA_API_URL}/version`, 'GET');
 			reply = `*API:* v${reply}`;
 			return { type: 'replyWithMarkdown', message: reply };
 	}
