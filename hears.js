@@ -1,5 +1,6 @@
 const dotSkills = require('./dotSkills');
 const simpleSkills = require('./simpleSkills');
+const alias = require('./services/alias.js');
 const helpReply = require('./services/cache.js').helpReply;
 
 module.exports = (bot) => {
@@ -12,7 +13,7 @@ module.exports = (bot) => {
 			message = message.substring(1);
 		}
 		let args = message.split(' ');
-		let cmd = args.shift().toLowerCase();
+		let cmd = alias(args.shift().toLowerCase());
 		if (isDot) {
 			if (dotSkills.hasOwnProperty(cmd)) {
 				if (user.id == Number(process.env.ADMIN)) {

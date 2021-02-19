@@ -7,7 +7,7 @@ module.exports = async (url, method, auth = null, body = null) => {
 		method: method
 	};
 	if (auth) requestParams.auth = auth;
-	if (body) requestParams.body = body;
+	if (body) requestParams.data = body;
 	try {
 		rawData = await axios(requestParams);
 		rawData = rawData.data;
