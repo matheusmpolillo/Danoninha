@@ -24,13 +24,19 @@ module.exports = async (method, event = null, datetime = null, repeat = null) =>
 			if (!event || !datetime || !repeat) return errorArgs;
 			event = event.replace(/_/g, ' ');
 			datetime = `2021-${datetime.replace(/T/g, ' ')}`;
+			if (repeat === 'true' || Number(repeat) === 1) repeat = true;
+			else if (repeat === 'false' || Number(repeat) === 0) repeat = false;
+			else {
+				reply = 'Wrong boolean repetition argument';
+				break;
+			}
 			response = await request(`${process.env.DANONINHA_API_URL}/newEvent`, 'POST', {
 				username: process.env.DANONINHA_API_USER,
 				password: process.env.DANONINHA_API_PASS
 			}, {
 				event: event,
 				date: moment(datetime).tz(process.env.MOMENT_TIMEZONE).format('YYYY-MM-DD HH:mm:ss'),
-				repeat: Boolean(repeat)
+				repeat: repeat === 'true'
 			});
 			if (response === 'OK') reply = `*${event}* successfully added`;
 			else reply = response;

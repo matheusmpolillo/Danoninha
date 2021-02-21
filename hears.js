@@ -1,7 +1,6 @@
 const dotSkills = require('./dotSkills');
 const simpleSkills = require('./simpleSkills');
 const alias = require('./services/alias.js');
-const helpReply = require('./services/cache.js').helpReply;
 
 module.exports = (bot) => {
 	bot.on('text', async (ctx) => {

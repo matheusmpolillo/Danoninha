@@ -12,7 +12,8 @@ module.exports = async (url, method, auth = null, body = null) => {
 		rawData = await axios(requestParams);
 		rawData = rawData.data;
 	} catch (e) {
-		rawData = e.response.data;
+		if (e.hasOwnProperty('response') && e.response !== undefined && e.response.hasOwnProperty('data')) rawData = e.response.data;
+		else rawData = e.message;
 	}
 	return rawData;
 };

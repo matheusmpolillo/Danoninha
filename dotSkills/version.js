@@ -13,7 +13,7 @@ module.exports = async (app) => {
 				username: process.env.DANONINHA_API_USER,
 				password: process.env.DANONINHA_API_PASS
 			});
-			reply = `*API:* v${reply}`;
+			reply = `*API:* ${reply}`;
 			return { type: 'replyWithMarkdown', message: reply };
 	}
 };

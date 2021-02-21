@@ -1,6 +1,26 @@
 module.exports = {
 	schedule: {},
-	helpReply: ``,
+	helpReply: `
+*DEFAULT COMMANDS*
+*help* - print this message
+*tilt* - prints some insulting message
+*src* - print the GitHub url with the bot's source code
+*this is the way* - this is the way
+
+*AUDIO COMMANDS*
+*yamete* - responds with an audio message with "Yamete Kudasai"
+*delicia (delícia/deliça/diliça)* - responds with an audio message with "Aaaai que delícia, cara"
+
+*SPECIAL COMMANDS*
+*ascii [model?]* - prints an ascii figure based on a pre-made model
+
+*ADMIN/DOT COMMANDS*
+*.sch [method] [event?] [date?] [repeat?]* - creates a reminder event on the MongoDB calendar
+*.status* - prints bot status
+*.env* - prints the environment in which the bot is running
+*.ping [destination]* - prints the ping result at the chosen destination
+*.v [destination]* - prints the version of the chosen destination
+	`,
 	errorReplies: {
 		'args': { type: 'reply', message: 'Insufficient arguments' },
 		'ascii': (model) => { return { type: 'replyWithMarkdown', message: `ASCII *${model}* model not found` }; }
@@ -105,13 +125,13 @@ module.exports = {
 	],
 	'ascii': {
 		'help': `
-		*ASCII COMMAND ARGUMENTS*\n
-*shrek ->* prints Shrek
-*yamete ->* prints a loli with a feature that indicates some malicious act
-*butt ->* prints a butt
+*ASCII COMMAND ARGUMENTS*\n
+*shrek* - prints Shrek
+*yamete* - prints a loli with a feature that indicates some malicious act
+*butt* - prints a butt
 		`,
 		'shrek': `
-			⢀⡴⠑⡄⠀⠀⠀⠀⠀⠀⠀⣀⣀⣤⣤⣤⣀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀ 
+⢀⡴⠑⡄⠀⠀⠀⠀⠀⠀⠀⣀⣀⣤⣤⣤⣀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀ 
 ⠸⡇⠀⠿⡀⠀⠀⠀⣀⡴⢿⣿⣿⣿⣿⣿⣿⣿⣷⣦⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀ 
 ⠀⠀⠀⠀⠑⢄⣠⠾⠁⣀⣄⡈⠙⣿⣿⣿⣿⣿⣿⣿⣿⣆⠀⠀⠀⠀⠀⠀⠀⠀ 
 ⠀⠀⠀⠀⢀⡀⠁⠀⠀⠈⠙⠛⠂⠈⣿⣿⣿⣿⣿⠿⡿⢿⣆⠀⠀⠀⠀⠀⠀⠀ 
@@ -128,7 +148,7 @@ module.exports = {
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠛⠻⠿⠿⠿⠿⠛⠉
 		`,
 		'yamete': `
-			⣿⣿⣷⡁⢆⠈⠕⢕⢂⢕⢂⢕⢂⢔⢂⢕⢄⠂⣂⠂⠆⢂⢕⢂⢕⢂⢕⢂⢕⢂
+⣿⣿⣷⡁⢆⠈⠕⢕⢂⢕⢂⢕⢂⢔⢂⢕⢄⠂⣂⠂⠆⢂⢕⢂⢕⢂⢕⢂⢕⢂
 ⣿⣿⣿⡷⠊⡢⡹⣦⡑⢂⢕⢂⢕⢂⢕⢂⠕⠔⠌⠝⠛⠶⠶⢶⣦⣄⢂⢕⢂⢕
 ⣿⣿⠏⣠⣾⣦⡐⢌⢿⣷⣦⣅⡑⠕⠡⠐⢿⠿⣛⠟⠛⠛⠛⠛⠡⢷⡈⢂⢕⢂
 ⠟⣡⣾⣿⣿⣿⣿⣦⣑⠝⢿⣿⣿⣿⣿⣿⡵⢁⣤⣶⣶⣿⢿⢿⢿⡟⢻⣤⢑⢂
@@ -144,7 +164,7 @@ module.exports = {
 ⠄⠪⣂⠁⢕⠆⠄⠂⠄⠁⡀⠂⡀⠄⢈⠉⢍⢛⢛⢛⢋⢔⢕⢕⢕⣽⣿⣿⠠⠈
 		`,
 		'butt': `
-	⠄⠄⠸⣿⣿⢣⢶⣟⣿⣖⣿⣷⣻⣮⡿⣽⣿⣻⣖⣶⣤⣭⡉⠄⠄⠄⠄⠄
+⠄⠄⠸⣿⣿⢣⢶⣟⣿⣖⣿⣷⣻⣮⡿⣽⣿⣻⣖⣶⣤⣭⡉⠄⠄⠄⠄⠄
 ⠄⠄⠄⢹⠣⣛⣣⣭⣭⣭⣁⡛⠻⢽⣿⣿⣿⣿⢻⣿⣿⣿⣽⡧⡄⠄⠄⠄
 ⠄⠄⠄⠄⣼⣿⣿⣿⣿⣿⣿⣿⣿⣶⣌⡛⢿⣽⢘⣿⣷⣿⡻⠏⣛⣀⠄⠄
 ⠄⠄⠄⣼⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣦⠙⡅⣿⠚⣡⣴⣿⣿⣿⡆⠄
