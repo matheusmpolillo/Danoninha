@@ -1,5 +1,7 @@
 module.exports = {
-	schedule: {},
+	RAM: {
+		imageLinks: []
+	},
 	helpReply: `
 *DEFAULT COMMANDS*
 *help* - print this message
@@ -13,17 +15,24 @@ module.exports = {
 
 *SPECIAL COMMANDS*
 *ascii [model?]* - prints an ascii figure based on a pre-made model
+*r [subreddit?]* - prints a random image from a subreddit feed (default: pic)
 
 *ADMIN/DOT COMMANDS*
-*.sch [method] [event?] [date?] [repeat?]* - creates a reminder event on the MongoDB calendar
+*.sch [method] [event?] [date?] [repeat?]* - controls the schedule module using event creation, removal and query
 *.status* - prints bot status
 *.env* - prints the environment in which the bot is running
 *.ping [destination]* - prints the ping result at the chosen destination
 *.v [destination]* - prints the version of the chosen destination
+*.cache [action] [mod]* - controls the cache module to query and clear data in memory
 	`,
 	errorReplies: {
 		'args': { type: 'reply', message: 'Insufficient arguments' },
 		'ascii': (model) => { return { type: 'replyWithMarkdown', message: `ASCII *${model}* model not found` }; }
+	},
+	customErrors: {
+		'400': {
+			'sendPhoto': 'This image could not be sent by me'
+		}
 	},
 	insults: [
 	    'olha aqui, você é tão feio que a sua incubadora tinha insulfilm',

@@ -5,5 +5,6 @@ module.exports = {
 	'delicia': () => { return { type: 'replyWithVoice', message: { source: `${__base}/audios/delicia.mp3` } }; },
 	'src': () => { return { type: 'reply', message: 'https://github.com/matheusmpolillo/Danoninha' }; },
 	'ascii': require('./ascii.js'),
-	'help': () => { return { type: 'replyWithMarkdown', message: require('../services/cache.js').helpReply }; }
+	'help': () => { return { type: 'replyWithMarkdown', message: require('../services/cache.js').helpReply }; },
+	'r': require('./reddit.js')
 };

@@ -3,5 +3,6 @@ module.exports = {
 	'status': () => { return { type: 'reply', message: 'Online' }; },
 	'env': () => { return { type: 'reply', message: process.env.BOT_ENVIRONMENT }; },
 	'ping': require('./ping.js'),
-	'v': require('./version.js')
+	'v': require('./version.js'),
+	'cache': require('./cache.js')
 };

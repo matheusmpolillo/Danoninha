@@ -1,6 +1,5 @@
 const moment = require('moment-timezone');
 const request = require('../services/request.js');
-const schedule = require('../services/cache.js').schedule;
 const errorArgs = require('../services/cache.js').errorReplies.args;
 
 module.exports = async (method, event = null, datetime = null, repeat = null) => {
