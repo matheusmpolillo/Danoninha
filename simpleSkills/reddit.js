@@ -9,19 +9,21 @@ module.exports = async (reddit) => {
 	let type = '';
 	let found = false;
 	do {
-		let random = getRandomNumber(0, feed.data.children.length);
-		let children = feed.data.children[random].data;
-		if (!children.pinned && children.post_hint === 'image') {
-			if (cache.indexOf(children.url) < 0) {
+		if (feed.hasOwnProperty('data') && feed.data && feed.data.hasOwnProperty('children') && feed.data.children) {
+			let random = getRandomNumber(0, feed.data.children.length);
+			let children = feed.data.children[random].data;
+			if (!children.pinned && children.post_hint === 'image') {
+				if (cache.indexOf(children.url) < 0) {
+					found = true;
+					cache.push(children.url);
+					type = 'replyWithPhoto';
+					reply = [children.url, { caption: `Random image from r/${reddit}` }];
+				}
+			} else {
 				found = true;
-				cache.push(children.url);
-				type = 'replyWithPhoto';
-				reply = [children.url, { caption: `Random image from r/${reddit}` }];
+				type = 'reply';
+				reply = 'No images found';
 			}
-		} else {
-			found = true;
-			type = 'reply';
-			reply = 'No images found';
 		}
 	} while (!found);
 
