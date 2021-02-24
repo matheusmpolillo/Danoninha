@@ -8,6 +8,8 @@ module.exports = {
 *tilt* - prints some insulting message
 *src* - print the GitHub url with the bot's source code
 *this is the way* - this is the way
+*steal* - STOP! You violated the law
+*all women are queens* - if she breathes she's a thot
 
 *AUDIO COMMANDS*
 *yamete* - responds with an audio message with "Yamete Kudasai"
@@ -26,13 +28,17 @@ module.exports = {
 *.cache [action] [mod]* - controls the cache module to query and clear data in memory
 	`,
 	errorReplies: {
-		'args': { type: 'reply', message: 'Insufficient arguments' },
-		'ascii': (model) => { return { type: 'replyWithMarkdown', message: `ASCII *${model}* model not found` }; }
+		args: { type: 'reply', message: 'Insufficient arguments' },
+		ascii: (model) => { return { type: 'replyWithMarkdown', message: `ASCII *${model}* model not found` }; }
 	},
 	customErrors: {
-		'400': {
-			'sendPhoto': 'This image could not be sent by me'
+		400: {
+			sendPhoto: 'This image could not be sent by me'
 		}
+	},
+	randomText: {
+		oblivion: 'STOP! You violated the law. Pay the court a fine or serve your sentence. Your stolen goods are now forfeit',
+		womanQueens: `If she breathes she's a thot`
 	},
 	insults: [
 	    'olha aqui, você é tão feio que a sua incubadora tinha insulfilm',
@@ -132,14 +138,14 @@ module.exports = {
 	    'você é sempre tão estúpido ou hoje é uma ocasião especial?',
 	    'bota uma dentadura no cú e ri pro caralho',
 	],
-	'ascii': {
-		'help': `
+	ascii: {
+		help: `
 *ASCII COMMAND ARGUMENTS*\n
 *shrek* - prints Shrek
 *yamete* - prints a loli with a feature that indicates some malicious act
 *butt* - prints a butt
 		`,
-		'shrek': `
+		shrek: `
 ⢀⡴⠑⡄⠀⠀⠀⠀⠀⠀⠀⣀⣀⣤⣤⣤⣀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀ 
 ⠸⡇⠀⠿⡀⠀⠀⠀⣀⡴⢿⣿⣿⣿⣿⣿⣿⣿⣷⣦⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀ 
 ⠀⠀⠀⠀⠑⢄⣠⠾⠁⣀⣄⡈⠙⣿⣿⣿⣿⣿⣿⣿⣿⣆⠀⠀⠀⠀⠀⠀⠀⠀ 
@@ -156,7 +162,7 @@ module.exports = {
 ⠀⠀⠀⠀⠀⠀⠀⠹⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠟⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀ 
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠛⠻⠿⠿⠿⠿⠛⠉
 		`,
-		'yamete': `
+		yamete: `
 ⣿⣿⣷⡁⢆⠈⠕⢕⢂⢕⢂⢕⢂⢔⢂⢕⢄⠂⣂⠂⠆⢂⢕⢂⢕⢂⢕⢂⢕⢂
 ⣿⣿⣿⡷⠊⡢⡹⣦⡑⢂⢕⢂⢕⢂⢕⢂⠕⠔⠌⠝⠛⠶⠶⢶⣦⣄⢂⢕⢂⢕
 ⣿⣿⠏⣠⣾⣦⡐⢌⢿⣷⣦⣅⡑⠕⠡⠐⢿⠿⣛⠟⠛⠛⠛⠛⠡⢷⡈⢂⢕⢂
@@ -172,7 +178,7 @@ module.exports = {
 ⠨⡂⡀⢑⢕⡅⠂⠄⠉⠛⠻⠿⢿⣿⣿⣿⣿⣿⣿⣿⣿⡿⢋⢔⢕⢕⣿⣿⠠⠈
 ⠄⠪⣂⠁⢕⠆⠄⠂⠄⠁⡀⠂⡀⠄⢈⠉⢍⢛⢛⢛⢋⢔⢕⢕⢕⣽⣿⣿⠠⠈
 		`,
-		'butt': `
+		butt: `
 ⠄⠄⠸⣿⣿⢣⢶⣟⣿⣖⣿⣷⣻⣮⡿⣽⣿⣻⣖⣶⣤⣭⡉⠄⠄⠄⠄⠄
 ⠄⠄⠄⢹⠣⣛⣣⣭⣭⣭⣁⡛⠻⢽⣿⣿⣿⣿⢻⣿⣿⣿⣽⡧⡄⠄⠄⠄
 ⠄⠄⠄⠄⣼⣿⣿⣿⣿⣿⣿⣿⣿⣶⣌⡛⢿⣽⢘⣿⣷⣿⡻⠏⣛⣀⠄⠄

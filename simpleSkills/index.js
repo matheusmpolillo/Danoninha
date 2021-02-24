@@ -6,5 +6,7 @@ module.exports = {
 	'src': () => { return { type: 'reply', message: 'https://github.com/matheusmpolillo/Danoninha' }; },
 	'ascii': require('./ascii.js'),
 	'help': () => { return { type: 'replyWithMarkdown', message: require('../services/cache.js').helpReply }; },
-	'r': require('./reddit.js')
+	'r': require('./reddit.js'),
+	'steal': () => { return { type: 'replyWithMarkdown', message: `_${require('../services/cache.js').randomText.oblivion}_` }; },
+	'all women are queens': () => { return { type: 'reply', message: require('../services/cache.js').randomText.womanQueens }; }
 };

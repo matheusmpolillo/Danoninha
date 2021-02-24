@@ -26,18 +26,20 @@ module.exports = (bot) => {
 			let response = null;
 			if (simpleSkills.hasOwnProperty(message.toLowerCase())) response = await simpleSkills[message.toLowerCase()]();
 			else if (simpleSkills.hasOwnProperty(cmd)) response = await simpleSkills[cmd](...args);
-			if (typeof response.message === 'object') {
-				try {
-					await ctx[response.type](...response.message);
-				} catch (err) {
-					ctx.replyWithMarkdown(`*Error:* ${customErrors[err.code][err.on.method]}`);
+			if (response) {
+				if (typeof response.message === 'object') {
+					try {
+						await ctx[response.type](...response.message);
+					} catch (err) {
+						ctx.replyWithMarkdown(`*Error:* ${customErrors[err.code][err.on.method]}`);
+					}
 				}
-			}
-			else {
-				try {
-					await ctx[response.type](response.message);
-				} catch (err) {
-					ctx.replyWithMarkdown(`*Error:* ${customErrors[err.code][err.on.method]}`);
+				else {
+					try {
+						await ctx[response.type](response.message);
+					} catch (err) {
+						ctx.replyWithMarkdown(`*Error:* ${customErrors[err.code][err.on.method]}`);
+					}
 				}
 			}
 		}
