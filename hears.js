@@ -27,11 +27,14 @@ module.exports = (bot) => {
 			if (simpleSkills.hasOwnProperty(message.toLowerCase())) response = await simpleSkills[message.toLowerCase()]();
 			else if (simpleSkills.hasOwnProperty(cmd)) response = await simpleSkills[cmd](...args);
 			if (response) {
-				if (typeof response.message === 'object') {
+				if (response.hasOwnProperty('extract') && response.extract) {
 					try {
 						await ctx[response.type](...response.message);
 					} catch (err) {
-						ctx.replyWithMarkdown(`*Error:* ${customErrors[err.code][err.on.method]}`);
+						let error = null;
+						if (err.hasOwnProperty('code') && err.hasOwnProperty('on') && err.on.hasOwnProperty('method')) error = customErrors[error.code][error.method];
+						else error = err.message;
+						ctx.replyWithMarkdown(`*Error:* ${error}`);
 					}
 				}
 				else {

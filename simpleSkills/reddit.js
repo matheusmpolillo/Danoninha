@@ -27,5 +27,5 @@ module.exports = async (reddit) => {
 		}
 	} while (!found);
 
-	return { type: type, message: reply };
+	return { type: type, message: reply, extract: true };
 };
