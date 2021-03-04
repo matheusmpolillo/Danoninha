@@ -2,9 +2,9 @@ const cache = require('../services/cache.js').RAM;
 const alias = require('../services/alias.js').cache;
 const errorArgs = require('../services/cache.js').errorReplies.args;
 
-module.exports = (action, mod) => {
+module.exports = (ctx, action, mod) => {
 	let reply = '';
-	if (!mod) return errorArgs;
+	if (!mod) return errorArgs(ctx);
 	mod = alias(mod);
 	switch (action.toLowerCase()) {
 		case 'check':
@@ -28,5 +28,5 @@ module.exports = (action, mod) => {
 			break;
 	}
 
-	return { type: 'replyWithMarkdown', message: reply };
+	ctx.replyWithMarkdown(reply);
 }

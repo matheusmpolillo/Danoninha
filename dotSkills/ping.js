@@ -1,9 +1,9 @@
 const request = require('../services/request.js');
 const errorArgs = require('../services/cache.js').errorReplies.args;
 
-module.exports = async (host) => {
+module.exports = async (ctx, host) => {
 	let reply = '';
-	if (!host) return errorArgs;
+	if (!host) return errorArgs(ctx);
 	switch (host.toLowerCase()) {
 		case 'api':
 			reply = await request(`${process.env.DANONINHA_API_URL}/ping`, 'GET', {
@@ -26,5 +26,5 @@ module.exports = async (host) => {
 			}
 			break;
 	}
-	return { type: 'replyWithMarkdown', message: reply };
+	ctx.replyWithMarkdown(reply);
 };

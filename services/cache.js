@@ -7,6 +7,7 @@ module.exports = {
 *help* - print this message
 *tilt* - prints some insulting message
 *src* - print the GitHub url with the bot's source code
+*bot* - prints the link for this bot
 *this is the way* - this is the way
 *steal* - STOP! You violated the law
 *all women are queens* - if she breathes she's a thot
@@ -19,17 +20,19 @@ module.exports = {
 *ascii [model?]* - prints an ascii figure based on a pre-made model
 *r [subreddit?]* - prints a random image from a subreddit feed (default: pic)
 
-*ADMIN/DOT COMMANDS*
+*ADMIN/DOT COMMANDS (only admin)*
 *.sch [method] [event?] [date?] [repeat?]* - controls the schedule module using event creation, removal and query
 *.status* - prints bot status
 *.env* - prints the environment in which the bot is running
+*.bot* - prints the test bot link
 *.ping [destination]* - prints the ping result at the chosen destination
 *.v [destination]* - prints the version of the chosen destination
 *.cache [action] [mod]* - controls the cache module to query and clear data in memory
+*.km [action]* - controls the mileage module as a driver
 	`,
 	errorReplies: {
-		args: { type: 'reply', message: 'Insufficient arguments' },
-		ascii: (model) => { return { type: 'replyWithMarkdown', message: `ASCII *${model}* model not found` }; }
+		args: (ctx) => ctx.reply('Insufficient arguments'),
+		ascii: (ctx, model) => ctx.replyWithMarkdown(`ASCII *${model}* model not found`)
 	},
 	customErrors: {
 		400: {

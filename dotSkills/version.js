@@ -2,18 +2,21 @@ const request = require('../services/request.js');
 const version = require('../package.json').version;
 const errorArgs = require('../services/cache.js').errorReplies.args;
 
-module.exports = async (app) => {
+module.exports = async (ctx, app) => {
 	let reply = '';
-	if (!app) return errorArgs;
+	if (!app) return errorArgs(ctx);
 	switch (app.toLowerCase()) {
 		case 'bot':
-			return { type: 'replyWithMarkdown', message: `*Bot:* v${version}` };
+			reply = `*Bot:* v${version}`;
+			break;
 		case 'api':
 			reply = await request(`${process.env.DANONINHA_API_URL}/version`, 'GET', {
 				username: process.env.DANONINHA_API_USER,
 				password: process.env.DANONINHA_API_PASS
 			});
 			reply = `*API:* ${reply}`;
-			return { type: 'replyWithMarkdown', message: reply };
+			break;
 	}
+
+	ctx.replyWithMarkdown(reply);
 };

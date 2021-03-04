@@ -1,6 +1,6 @@
 let count = 0;
 
-module.exports = () => {
+module.exports = (ctx) => {
 	let reply = '';
 	if (count < 3) {
 		count++;
@@ -9,5 +9,5 @@ module.exports = () => {
 		count = 0;
 		reply = '_This is the_ *FUCKING* _way_';
 	}
-	return { type: 'replyWithMarkdown', message: reply };
+	ctx.replyWithMarkdown(reply);
 };

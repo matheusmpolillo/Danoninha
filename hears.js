@@ -18,31 +18,29 @@ module.exports = (bot) => {
 		if (isDot) {
 			if (dotSkills.hasOwnProperty(cmd)) {
 				if (user.id == Number(process.env.ADMIN)) {
-					let response = await dotSkills[cmd](...args);
-					ctx[response.type](response.message);
+					await dotSkills[cmd](ctx, ...args);
 				} else ctx.reply(`${user.first_name} ${user.last_name} you are not an admin`);
 			}
 		} else {
 			let response = null;
-			if (simpleSkills.hasOwnProperty(message.toLowerCase())) response = await simpleSkills[message.toLowerCase()]();
-			else if (simpleSkills.hasOwnProperty(cmd)) response = await simpleSkills[cmd](...args);
-			if (response) {
-				if (response.hasOwnProperty('extract') && response.extract) {
-					try {
-						await ctx[response.type](...response.message);
-					} catch (err) {
-						let error = null;
-						if (err.hasOwnProperty('code') && err.hasOwnProperty('on') && err.on.hasOwnProperty('method')) error = customErrors[error.code][error.method];
-						else error = err.message;
-						ctx.replyWithMarkdown(`*Error:* ${error}`);
-					}
+			if (simpleSkills.hasOwnProperty(message.toLowerCase())) {
+				try {
+					await simpleSkills[message.toLowerCase()](ctx);
+				} catch(err) {
+					let error = null;
+					if (err.hasOwnProperty('code') && err.hasOwnProperty('on') && err.on.hasOwnProperty('method')) error = customErrors[error.code][error.method];
+					else error = err.message;
+					ctx.replyWithMarkdown(`*Error:* ${error}`);
 				}
-				else {
-					try {
-						await ctx[response.type](response.message);
-					} catch (err) {
-						ctx.replyWithMarkdown(`*Error:* ${customErrors[err.code][err.on.method]}`);
-					}
+			}
+			else if (simpleSkills.hasOwnProperty(cmd)) {
+				try {
+					await simpleSkills[cmd](ctx, ...args);
+				} catch(err) {
+					let error = null;
+					if (err.hasOwnProperty('code') && err.hasOwnProperty('on') && err.on.hasOwnProperty('method')) error = customErrors[error.code][error.method];
+					else error = err.message;
+					ctx.replyWithMarkdown(`*Error:* ${error}`);
 				}
 			}
 		}

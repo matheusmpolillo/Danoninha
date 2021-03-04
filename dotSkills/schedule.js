@@ -2,10 +2,10 @@ const moment = require('moment-timezone');
 const request = require('../services/request.js');
 const errorArgs = require('../services/cache.js').errorReplies.args;
 
-module.exports = async (method, event = null, datetime = null, repeat = null) => {
+module.exports = async (ctx, method, event = null, datetime = null, repeat = null) => {
 	let reply = '';
 	let response = '';
-	if (!method) return errorArgs;
+	if (!method) return errorArgs(ctx);
 	switch (method.toLowerCase()) {
 		case 'show':
 			response = await request(`${process.env.DANONINHA_API_URL}/getEvent`, 'GET', {
@@ -20,7 +20,7 @@ module.exports = async (method, event = null, datetime = null, repeat = null) =>
 			} else reply = 'There are no events';
 			break;
 		case 'add':
-			if (!event || !datetime || !repeat) return errorArgs;
+			if (!event || !datetime || !repeat) return errorArgs(ctx);
 			event = event.replace(/_/g, ' ');
 			datetime = `2021-${datetime.replace(/T/g, ' ')}`;
 			if (repeat === 'true' || Number(repeat) === 1) repeat = true;
@@ -41,7 +41,7 @@ module.exports = async (method, event = null, datetime = null, repeat = null) =>
 			else reply = response;
 			break;
 		case 'remove':
-			if (!event) return errorArgs;
+			if (!event) return errorArgs(ctx);
 			event = event.replace(/_/g, ' ');
 			response = await request(`${process.env.DANONINHA_API_URL}/removeEvent`, 'POST', {
 				username: process.env.DANONINHA_API_USER,
@@ -52,5 +52,5 @@ module.exports = async (method, event = null, datetime = null, repeat = null) =>
 			break;
 	}
 
-	return { type: 'replyWithMarkdown', message: reply };
+	ctx.replyWithMarkdown(reply);
 };
