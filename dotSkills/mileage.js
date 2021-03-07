@@ -17,7 +17,6 @@ module.exports = async (ctx, method, km) => {
 			if (!km) return errorArgs(ctx);
 			km = Number(km);
 			if (Number.isNaN(km)) reply = 'Non-numeric format';
-			else if (!Number.isInteger(km)) reply = 'Non-integer number format';
 			else {
 				response = await request(`${process.env.DANONINHA_API_URL}/mileage`, 'POST', {
 					username: process.env.DANONINHA_API_USER,
